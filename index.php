@@ -1,3 +1,7 @@
+<?php
+include "connection.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 
@@ -41,7 +45,7 @@
                     <div class="col-6 d-none d-lg-block background"></div>
                     <!-- signupbox -->
 
-                    <div class="col-12 col-lg-6" id="signUpBox">
+                    <div class="col-12 col-lg-6" id="signup-box">
                         <div class="row g-2">
 
                             <div class="col-12">
@@ -83,13 +87,19 @@
                             <div class="col-6">
                                 <label class="form-label">Gender</label>
                                 <select class="form-control" id="gender">
+                                    <?php
+                                    $rs = Database::search("SELECT * FROM `gender`");
+                                    $num = $rs->num_rows;
 
-
-
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-
-
+                                    for ($x = 0; $x < $num; $x++) {
+                                        $data = $rs->fetch_assoc();
+                                        ?>
+                                        <option value="<?php echo $data["gender_id"]; ?>">
+                                            <?php echo $data["gender_name"]; ?>
+                                        </option>
+                                        <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
 
@@ -98,7 +108,8 @@
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid">
-                                <button class="btn btn-dark">Already have an account? Sign In</button>
+                                <button class="btn btn-dark" onclick="changeView()">Already have an account? Sign
+                                    In</button>
                             </div>
 
                         </div>
@@ -108,7 +119,7 @@
 
                     <!-- signinbox -->
 
-                    <div class="col-12 col-lg-6 d-none" id="signInBox">
+                    <div class="col-12 col-lg-6 d-none" id="sign-in-box">
                         <div class="row g-2">
                             <div class="col-12">
                                 <p class="title02">Sign In</p>
@@ -135,7 +146,7 @@
                                 <button class="btn btn-primary">Sign In</button>
                             </div>
                             <div class="col-12 col-lg-6 d-grid">
-                                <button class="btn btn-danger">New to eShop? Join Now</button>
+                                <button class="btn btn-danger" onclick="changeView()">New to eShop? Join Now</button>
                             </div>
                         </div>
                     </div>
@@ -149,7 +160,7 @@
 
             <!-- footer -->
             <div class="col-12 fixed-bottom d-none d-lg-block">
-                <p class="text-center">&copy; 2022 eShop.lk || All Rights Reserved</p>
+                <p class="text-center">&copy; 2023 eShop.lk || All Rights Reserved</p>
             </div>
             <!-- footer -->
 
