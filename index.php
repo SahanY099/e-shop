@@ -3,7 +3,7 @@ include "connection.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
 
 <head>
 
@@ -43,8 +43,7 @@ include "connection.php";
                 <div class="row">
 
                     <div class="col-6 d-none d-lg-block background"></div>
-                    <!-- signupbox -->
-
+                    <!-- signup box -->
                     <div class="col-12 col-lg-6" id="signup-box">
                         <div class="row g-2">
 
@@ -52,8 +51,8 @@ include "connection.php";
                                 <p class="title02">Create New Account</p>
                             </div>
 
-                            <div class="col-12 d-none" id="msgdiv">
-                                <div class="alert alert-danger" role="alert" id="msg">
+                            <div class="col-12 d-none" id="msg-div-signup">
+                                <div class="alert alert-danger" role="alert" id="msg-signup">
 
                                 </div>
                             </div>
@@ -104,7 +103,7 @@ include "connection.php";
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid">
-                                <button class="btn btn-primary">Sign Up</button>
+                                <button class="btn btn-primary" onclick="signup();">Sign Up</button>
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid">
@@ -114,28 +113,55 @@ include "connection.php";
 
                         </div>
                     </div>
+                    <!-- signup box -->
 
-                    <!-- signupbox -->
-
-                    <!-- signinbox -->
-
+                    <!-- sign in box -->
                     <div class="col-12 col-lg-6 d-none" id="sign-in-box">
                         <div class="row g-2">
                             <div class="col-12">
                                 <p class="title02">Sign In</p>
                             </div>
 
+                            <div class="col-12 d-none" id="msg-div-sign-in">
+                                <div class="alert alert-danger" role="alert" id="msg-sign-in">
+
+                                </div>
+                            </div>
+
+                            <?php
+
+                            $email = "";
+                            $password = "";
+                            $rememberMe = false;
+
+                            if (isset($_COOKIE["email"])) {
+                                $email = $_COOKIE["email"];
+                            }
+                            if (isset($_COOKIE["password"])) {
+                                $password = $_COOKIE["password"];
+                            }
+
+
+                            if ($email & $password) {
+                                $rememberMe = true;
+                            }
+
+                            ?>
+
                             <div class="col-12">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email2" value="" />
+                                <input type="email" class="form-control" id="sign-in-email"
+                                    value="<?php echo $email; ?>" />
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password2" value="" />
+                                <input type="password" class="form-control" id="sign-in-password"
+                                    value="<?php echo $password; ?>" />
                             </div>
                             <div class="col-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="rememberme" />
+                                    <input class="form-check-input" type="checkbox" id="remember-me"
+                                        checked="<?php echo $rememberMe; ?>" />
                                     <label class="form-check-label">Remember Me</label>
                                 </div>
                             </div>
@@ -143,7 +169,7 @@ include "connection.php";
                                 <a href="#" class="link-primary">Forgot Password?</a>
                             </div>
                             <div class="col-12 col-lg-6 d-grid">
-                                <button class="btn btn-primary">Sign In</button>
+                                <button class="btn btn-primary" onclick="signIn();">Sign In</button>
                             </div>
                             <div class="col-12 col-lg-6 d-grid">
                                 <button class="btn btn-danger" onclick="changeView()">New to eShop? Join Now</button>
@@ -151,7 +177,7 @@ include "connection.php";
                         </div>
                     </div>
 
-                    <!-- signinbox -->
+                    <!-- sign in box -->
 
                 </div>
             </div>
