@@ -161,3 +161,20 @@ function resetPassword() {
     request.open('POST', 'resetPasswordProcess.php', true);
     request.send(requestData);
 }
+
+function signOut() {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                window.location.reload();
+            }
+        }
+    };
+
+    request.open("GET", "signOutProcess.php", true);
+    request.send();
+}

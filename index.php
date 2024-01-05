@@ -15,7 +15,7 @@ include "connection.php";
     <link rel="stylesheet" href="bootstrap.css" />
     <link rel="stylesheet" href="style.css" />
 
-    <link rel="icon" href="resource/logo.svg" />
+    <link rel="icon" href="resources/logo.svg" />
 
 </head>
 
