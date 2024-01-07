@@ -236,3 +236,83 @@ function updateProfile() {
     request.open("POST", "updateProfileProcess.php", true);
     request.send(requestData);
 }
+
+function addProduct() {
+    const category = document.getElementById('category');
+    const brand = document.getElementById('brand');
+    const model = document.getElementById('model');
+    const title = document.getElementById('title');
+
+    let condition = 0;
+
+    if (document.getElementById('brand-new').checked) {
+        condition = 1;
+    } else if (document.getElementById('used').checked) {
+        condition = 2;
+    }
+
+    const color = document.getElementById('color');
+    const description = document.getElementById('description');
+    const qty = document.getElementById('qty');
+    const cost = document.getElementById('cost');
+    const deliveryWithinColombo = document.getElementById('delivery-within-colombo');
+    const deliveryOutOfColombo = document.getElementById('delivery-out-of-colombo');
+
+    const imageUploader = document.getElementById('image-uploader');
+
+    const requestData = new FormData();
+
+    requestData.append('category', category.value);
+    requestData.append('brand', brand.value);
+    requestData.append('model', model.value);
+    requestData.append('title', title.value);
+    requestData.append('condition', condition);
+    requestData.append('color', color.value);
+    requestData.append('description', description.value);
+    requestData.append('qty', qty.value);
+    requestData.append('cost', cost.value);
+    requestData.append('deliveryWithinColombo', deliveryWithinColombo.value);
+    requestData.append('deliveryOutOfColombo', deliveryOutOfColombo.value);
+
+    for (let i = 0; i < imageUploader.files.length; i++) {
+        requestData.append('image-' + i, imageUploader.files[i]);
+    }
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                window.location.reload();
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open("POST", "addProductProcess.php", true);
+    request.send(requestData);
+}
+
+function changeProductImages() {
+    let image = document.getElementById("image-uploader");
+
+    image.onchange = function () {
+        let file_count = image.files.length;
+
+        if (file_count <= 3) {
+            for (let x = 0; x < file_count; x++) {
+                let file = this.files[x];
+                let url = window.URL.createObjectURL(file);
+
+                console.log("img-" + x);
+
+                document.getElementById("img-" + x).src = url;
+            }
+        } else {
+            alert(file_count + " files. You are proceed to upload only 3 or less than 3 files.");
+        }
+    };
+};

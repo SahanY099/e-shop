@@ -368,22 +368,25 @@
                                         <div class="offset-lg-3 col-12 col-lg-6">
                                             <div class="row">
                                                 <div class="col-4 border border-primary rounded">
-                                                    <img src="resources/add-product-img.svg" class="img-fluid"
-                                                        alt="Dummy image" style="width: 250px;" />
+                                                    <img class="img-fluid" id="img-0" alt="Dummy image"
+                                                        style="width: 250px;" src="resources/add-product-img.svg" />
                                                 </div>
                                                 <div class="col-4 border border-primary rounded">
-                                                    <img src="resources/add-product-img.svg" class="img-fluid"
-                                                        alt="Dummy image" style="width: 250px;" />
+                                                    <img alt="Dummy image" style="width: 250px;" class="img-fluid"
+                                                        id="img-1" src="resources/add-product-img.svg" />
                                                 </div>
                                                 <div class="col-4 border border-primary rounded">
-                                                    <img src="resources/add-product-img.svg" class="img-fluid"
-                                                        alt="Dummy image" style="width: 250px;" />
+                                                    <img class="img-fluid" id="img-2" alt="Dummy image"
+                                                        style="width: 250px;" src="resources/add-product-img.svg" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="offset-lg-3 col-12 col-lg-6 d-grid mt-3">
                                             <input type="file" class="d-none" multiple id="image-uploader" />
-                                            <label for="" class="col-12 btn btn-primary">Upload Images</label>
+                                            <label for="image-uploader" class="col-12 btn btn-primary"
+                                                onclick="changeProductImages();">
+                                                Upload Images
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
