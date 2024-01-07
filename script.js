@@ -178,3 +178,61 @@ function signOut() {
     request.open("GET", "signOutProcess.php", true);
     request.send();
 }
+
+
+function changeProfileImage() {
+    const profileImageSelector = document.getElementById('profile-image-selector');
+
+    profileImageSelector.onchange = function () {
+        const file = this.files[0];
+        const url = window.URL.createObjectURL(file);
+
+        document.getElementById('profile-image').src = url;
+    };
+
+}
+
+function updateProfile() {
+    const fname = document.getElementById('fname');
+    const lname = document.getElementById('lname');
+    const mobile = document.getElementById('mobile');
+    const line1 = document.getElementById('line1');
+    const line2 = document.getElementById('line2');
+    const province = document.getElementById('province');
+    const district = document.getElementById('district');
+    const city = document.getElementById('city');
+    const postalCode = document.getElementById('postal-code');
+    const profileImageSelector = document.getElementById('profile-image-selector');
+
+    const requestData = new FormData();
+
+    requestData.append('fname', fname.value);
+    requestData.append('lname', lname.value);
+    requestData.append('mobile', mobile.value);
+    requestData.append('line1', line1.value);
+    requestData.append('line2', line2.value);
+    requestData.append('province', province.value);
+    requestData.append('district', district.value);
+    requestData.append('city', city.value);
+    requestData.append('postalCode', postalCode.value);
+    requestData.append('profileImage', profileImageSelector.files[0]);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "updated" || response == "saved") {
+                window.location.reload();
+            } else if (response == "no-image-selected") {
+                alert("You haven't selected any profile image");
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open("POST", "updateProfileProcess.php", true);
+    request.send(requestData);
+}

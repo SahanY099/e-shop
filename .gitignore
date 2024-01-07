@@ -1,5 +1,6 @@
 temp/
 resources/product_images
+resources/profile_images
 connection.php
 forgotPasswordProcess.php
 .vscode/
