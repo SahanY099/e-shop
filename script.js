@@ -336,3 +336,55 @@ function changeStatus(productId) {
     request.open("GET", "changeStatusProcess.php?productId=" + productId, true);
     request.send();
 }
+
+function sortMyProducts(pageNo = 1) {
+    const search = document.getElementById('search');
+    let time = 0;
+
+    console.log(pageNo);
+
+    if (document.getElementById("new-to-old").checked) {
+        time = 1;
+    } else if (document.getElementById("old-to-new").checked) {
+        time = 2;
+    }
+
+    let qty = 0;
+
+    if (document.getElementById('high-to-low').checked) {
+        qty = 1;
+    } else if (document.getElementById('low-to-high').checked) {
+        qty = 2;
+    }
+
+    let condition = 0;
+
+    if (document.getElementById("brand-new").checked) {
+        condition = 1;
+    } else if (document.getElementById('used').checked) {
+        condition = 2;
+    }
+
+    const requestData = new FormData();
+    requestData.append('search', search.value);
+    requestData.append('time', time);
+    requestData.append('qty', qty);
+    requestData.append('condition', condition);
+    requestData.append('page', pageNo);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            document.getElementById('sort').innerHTML = response;
+        }
+    };
+
+    request.open("POST", "sortProcess.php", true);
+    request.send(requestData);
+}
+
+function clearSort() {
+    window.location.reload();
+}

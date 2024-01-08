@@ -107,8 +107,8 @@ if (isset($_SESSION["user"])) {
                                         <div class="col-11">
                                             <div class="row">
                                                 <div class="col-10">
-                                                    <input type="text" placeholder="Search..." class="form-control"
-                                                        id="s" />
+                                                    <input type="text" placeholder="Search..." class="form-control" value=""
+                                                        id="search" autocomplete="off" />
                                                 </div>
                                                 <div class="col-1 p-1">
                                                     <label class="form-label"><i class="bi bi-search fs-5"></i></label>
@@ -124,16 +124,16 @@ if (isset($_SESSION["user"])) {
                                         </div>
                                         <div class="col-12">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="r1" id="n">
-                                                <label class="form-check-label" for="n">
+                                                <input class="form-check-input" type="radio" name="r1" id="new-to-old">
+                                                <label class="form-check-label" for="new-to-old">
                                                     Newest to oldest
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="r1" id="o">
-                                                <label class="form-check-label" for="o">
+                                                <input class="form-check-input" type="radio" name="r1" id="old-to-new">
+                                                <label class="form-check-label" for="old-to-new">
                                                     Oldest to newest
                                                 </label>
                                             </div>
@@ -148,8 +148,8 @@ if (isset($_SESSION["user"])) {
 
                                         <div class="col-12">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="r2" id="h">
-                                                <label class="form-check-label" for="h">
+                                                <input class="form-check-input" type="radio" name="r2" id="high-to-low">
+                                                <label class="form-check-label" for="high-to-low">
                                                     High to low
                                                 </label>
                                             </div>
@@ -157,8 +157,8 @@ if (isset($_SESSION["user"])) {
 
                                         <div class="col-12">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="r2" id="l">
-                                                <label class="form-check-label" for="l">
+                                                <input class="form-check-input" type="radio" name="r2" id="low-to-high">
+                                                <label class="form-check-label" for="low-to-high">
                                                     Low to high
                                                 </label>
                                             </div>
@@ -173,8 +173,8 @@ if (isset($_SESSION["user"])) {
 
                                         <div class="col-12">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="r3" id="b">
-                                                <label class="form-check-label" for="b">
+                                                <input class="form-check-input" type="radio" name="r3" id="brand-new">
+                                                <label class="form-check-label" for="brand-new">
                                                     Brand New
                                                 </label>
                                             </div>
@@ -182,8 +182,8 @@ if (isset($_SESSION["user"])) {
 
                                         <div class="col-12">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="r3" id="u">
-                                                <label class="form-check-label" for="u">
+                                                <input class="form-check-input" type="radio" name="r3" id="used">
+                                                <label class="form-check-label" for="used">
                                                     Used
                                                 </label>
                                             </div>
@@ -192,10 +192,12 @@ if (isset($_SESSION["user"])) {
                                         <div class="col-12 text-center mt-3 mb-3">
                                             <div class="row g-2">
                                                 <div class="col-12 col-lg-6 d-grid">
-                                                    <button class="btn btn-success fw-bold">Sort</button>
+                                                    <button class="btn btn-success fw-bold"
+                                                        onclick="sortMyProducts(<?php $pageNo ?>);">Sort</button>
                                                 </div>
                                                 <div class="col-12 col-lg-6 d-grid">
-                                                    <button class="btn btn-primary fw-bold">Clear</button>
+                                                    <button class="btn btn-primary fw-bold"
+                                                        onclick="clearSort();">Clear</button>
                                                 </div>
                                             </div>
                                         </div>
