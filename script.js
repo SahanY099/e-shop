@@ -316,3 +316,23 @@ function changeProductImages() {
         }
     };
 };
+
+
+function changeStatus(productId) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "deactivated" || response == "activated") {
+                window.location.reload();
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open("GET", "changeStatusProcess.php?productId=" + productId, true);
+    request.send();
+}
