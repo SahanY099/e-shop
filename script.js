@@ -388,3 +388,59 @@ function sortMyProducts(pageNo = 1) {
 function clearSort() {
     window.location.reload();
 }
+
+function sendId(id) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                window.location = "updateProduct.php";
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open('GET', "sendIdProcess.php?productId=" + id, true);
+    request.send();
+}
+
+function updateProduct() {
+    const title = document.getElementById('title');
+    const qty = document.getElementById('qty');
+    const deliveryWithinColombo = document.getElementById('delivery-within-colombo');
+    const deliveryOutOfColombo = document.getElementById('delivery-out-of-colombo');
+    const description = document.getElementById('description');
+    const imageUploader = document.getElementById('image-uploader');
+
+    const requestData = new FormData();
+    requestData.append('title', title.value);
+    requestData.append('qty', qty.value);
+    requestData.append('deliveryWithinColombo', deliveryWithinColombo.value);
+    requestData.append('deliveryOutOfColombo', deliveryOutOfColombo.value);
+    requestData.append('description', description.value);
+
+    const fileCount = imageUploader.files.length;
+
+    for (let x = 0; x < fileCount; x++) {
+        requestData.append('image-' + x, imageUploader.files[x]);
+    }
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            if (response == "product-updated-successfully") {
+                window.location = "myProducts.php";
+            }
+            else { alert(response); }
+        }
+    };
+
+    request.open('POST', 'updateProductProcess.php', true);
+    request.send(requestData);
+}

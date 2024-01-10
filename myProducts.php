@@ -306,7 +306,8 @@ if (isset($_SESSION["user"])) {
                                                                 <div class="col-12">
                                                                     <div class="row g-1">
                                                                         <div class="col-12 d-grid">
-                                                                            <button class="btn btn-success fw-bold">
+                                                                            <button class="btn btn-success fw-bold"
+                                                                                onclick="sendId(<?php echo $product_data['id']; ?>);">
                                                                                 Update
                                                                             </button>
                                                                         </div>
