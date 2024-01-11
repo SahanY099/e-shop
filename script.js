@@ -444,3 +444,62 @@ function updateProduct() {
     request.open('POST', 'updateProductProcess.php', true);
     request.send(requestData);
 }
+
+function basicSearch(pageNo) {
+    const text = document.getElementById("basic-search-text");
+    const select = document.getElementById("basic-search-select");
+
+    const requestData = new FormData();
+    requestData.append("text", text.value);
+    requestData.append("select", select.value);
+    requestData.append("page", pageNo);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            document.getElementById("basic-search-result").innerHTML = response;
+
+        }
+    };
+
+    request.open("POST", "basicSearchProcess.php", true);
+    request.send(requestData);
+}
+
+function advancedSearch(pageNo) {
+    const text = document.getElementById("text-input");
+    const category = document.getElementById("category-input");
+    const brand = document.getElementById("brand-input");
+    const model = document.getElementById("model-input");
+    const condition = document.getElementById("condition-input");
+    const color = document.getElementById("color-input");
+    const priceFrom = document.getElementById("price-from-input");
+    const priceTo = document.getElementById("price-to-input");
+    const sort = document.getElementById("sort-input");
+
+    const requestData = new FormData();
+    requestData.append("text", text.value);
+    requestData.append("category", category.value);
+    requestData.append("brand", brand.value);
+    requestData.append("model", model.value);
+    requestData.append("condition", condition.value);
+    requestData.append("color", color.value);
+    requestData.append("priceFrom", priceFrom.value);
+    requestData.append("priceTo", priceTo.value);
+    requestData.append("sort", sort.value);
+    requestData.append("page", pageNo);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            document.getElementById("view-area").innerHTML = response;
+        }
+    };
+
+    request.open("POST", "advancedSearchProcess.php", true);
+    request.send(requestData);
+}
