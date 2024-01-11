@@ -444,3 +444,26 @@ function updateProduct() {
     request.open('POST', 'updateProductProcess.php', true);
     request.send(requestData);
 }
+
+function basicSearch(pageNo) {
+    const text = document.getElementById("basic-search-text");
+    const select = document.getElementById("basic-search-select");
+
+    const requestData = new FormData();
+    requestData.append("text", text.value);
+    requestData.append("select", select.value);
+    requestData.append("page", pageNo);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            document.getElementById("basic-search-result").innerHTML = response;
+
+        }
+    };
+
+    request.open("POST", "basicSearchProcess.php", true);
+    request.send(requestData);
+}

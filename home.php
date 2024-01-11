@@ -36,9 +36,9 @@ include "connection.php";
 
                         <div class="input-group mt-3 mb-3">
                             <input type="text" class="form-control" aria-label="Text input with dropdown button"
-                                id="basic_search_txt">
+                                id="basic-search-text">
 
-                            <select class="form-select" style="max-width: 250px;" id="basic_search_select">
+                            <select class="form-select" style="max-width: 250px;" id="basic-search-select">
                                 <option value="0">All Categories</option>
 
                                 <?php
@@ -63,11 +63,13 @@ include "connection.php";
                     </div>
 
                     <div class="col-12 col-lg-2 d-grid">
-                        <button class="btn btn-primary mt-3 mb-3">Search</button>
+                        <button class="btn btn-primary mt-3 mb-3" onclick="basicSearch(0);">
+                            Search
+                        </button>
                     </div>
 
-                    <div class="col-12 col-lg-2 mt-2 mt-lg-4 text-center text-lg-start">
-                        <a href="#" class="text-decoration-none link-secondary fw-bold">Advanced</a>
+                    <div class=" col-12 col-lg-2 mt-2 mt-lg-4 text-center text-lg-start">
+                        <a href="advancedSearch.php" class="text-decoration-none link-secondary fw-bold">Advanced</a>
                     </div>
 
                 </div>
@@ -75,7 +77,7 @@ include "connection.php";
 
             <hr />
 
-            <div class="col-12" id="basicSearchResult">
+            <div class="col-12" id="basic-search-result">
                 <div class="row">
 
                     <!-- Carousel -->

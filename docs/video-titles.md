@@ -17,3 +17,5 @@
 15. Design a responsive seller's store page using HTML, CSS, JavaScript and Bootstrap
 16. Program the seller's store using product sorting and pagination
 17. Program the seller's product activation and deactivation process
+18. Design a responsive product searching page using HTML, CSS, JavaScript and Bootstrap
+19. Program the basic product searching process including pagination
