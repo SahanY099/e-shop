@@ -121,68 +121,71 @@ if (!empty($search_text) && $select == 0) {
             }
             ?>
 
-            <div class="col-12 text-center mb-3">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-lg justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" <?php
+            <<<<<<< HEAD <div class="col-12 text-center mb-3">
+                =======
+                <div class="col-8 col-lg-6 text-center mb-3">
+                    >>>>>>> e09df034f3f4207c2c8b6327ad1fcebed059bd78
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-lg justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" <?php
 
-                            if ($pageNo <= 1) {
-                                echo "href='#'";
-                            } else {
-                                echo "onclick=basicSearch(" . ($pageNo - 1) . ");";
+                                if ($pageNo <= 1) {
+                                    echo "href='#'";
+                                } else {
+                                    echo "onclick=basicSearch(" . ($pageNo - 1) . ");";
+                                }
+
+                                ?> aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+
+                            <?php
+
+                            for ($i = 1; $i < $number_of_pages + 1; $i++) {
+                                if ($i == $pageNo) {
+                                    ?>
+
+                                    <li class="page-item active">
+                                        <a class="page-link" onclick="basicSearch(<?php echo $i; ?>);">
+                                            <?php echo $i; ?>
+                                        </a>
+                                    </li>
+
+                                    <?php
+                                } else {
+                                    ?>
+
+                                    <li class="page-item">
+                                        <a class="page-link" onclick="basicSearch(<?php echo $i; ?>);">
+                                            <?php echo $i; ?>
+                                        </a>
+                                    </li>
+
+                                    <?php
+                                }
                             }
 
-                            ?> aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-
-                        <?php
-
-                        for ($i = 1; $i < $number_of_pages + 1; $i++) {
-                            if ($i == $pageNo) {
-                                ?>
-
-                                <li class="page-item active">
-                                    <a class="page-link" onclick="basicSearch(<?php echo $i; ?>);">
-                                        <?php echo $i; ?>
-                                    </a>
-                                </li>
-
-                                <?php
-                            } else {
-                                ?>
-
-                                <li class="page-item">
-                                    <a class="page-link" onclick="basicSearch(<?php echo $i; ?>);">
-                                        <?php echo $i; ?>
-                                    </a>
-                                </li>
-
-                                <?php
-                            }
-                        }
-
-                        ?>
+                            ?>
 
 
-                        <li class="page-item">
-                            <a class="page-link" <?php
+                            <li class="page-item">
+                                <a class="page-link" <?php
 
-                            if ($pageNo >= $number_of_pages) {
-                                echo "href='#'";
-                            } else {
-                                echo "onclick=basicSearch(" . ($pageNo + 1) . ");";
-                            }
+                                if ($pageNo >= $number_of_pages) {
+                                    echo "href='#'";
+                                } else {
+                                    echo "onclick=basicSearch(" . ($pageNo + 1) . ");";
+                                }
 
-                            ?> aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+                                ?> aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
 
 
         </div>
