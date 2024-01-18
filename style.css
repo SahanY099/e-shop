@@ -104,3 +104,47 @@
 .pm4 {
   background-image: url("resources/payment_method/paypal_img.png");
 }
+
+.singleProduct {
+  padding-top: 65px;
+  padding-bottom: 145px;
+  padding: 20px;
+}
+
+.mainImg {
+  height: 640px;
+  background-image: url("resources/empty.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.product-qty {
+  width: 500px;
+  height: 45px;
+  padding: 10px;
+}
+
+.qty-buttons {
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 30px;
+  border: solid 1px rgb(72, 71, 71);
+}
+
+.qty-inc,
+.qty-dec {
+  width: 100%;
+  height: 50%;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.qty-inc {
+  border-top-right-radius: 5px;
+}
+
+.qty-dec {
+  border-bottom-right-radius: 5px;
+}

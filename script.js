@@ -503,3 +503,45 @@ function advancedSearch(pageNo) {
     request.open("POST", "advancedSearchProcess.php", true);
     request.send(requestData);
 }
+
+function loadMainImage(imgId) {
+    const imageSrc = document.getElementById("product-image-" + imgId).src;
+    const mainImageContainer = document.getElementById("main-image-container");
+
+    mainImageContainer.style.backgroundImage = "url(" + imageSrc + ")";
+}
+
+function checkQuantityValue(maxQty) {
+    const quantityInput = document.getElementById("qty-input");
+    if (quantityInput.value <= 0) {
+        alert("Quantify must be 1 or more.");
+        quantityInput.value = 1;
+    } else if (quantityInput.value > maxQty) {
+        alert("Insufficient quantify.");
+        quantityInput.value = maxQty;
+    }
+}
+
+function quantityIncrease(maxQty) {
+    const quantityInput = document.getElementById("qty-input");
+
+    if (quantityInput.value < maxQty) {
+        const newValue = parseInt(quantityInput.value) + 1;
+        quantityInput.value = newValue;
+    } else {
+        alert("Maximum quantity has reached.");
+        quantityInput.value = maxQty;
+    }
+}
+
+function quantityDecrease(maxQty) {
+    const quantityInput = document.getElementById("qty-input");
+
+    if (quantityInput.value > 1) {
+        const newValue = parseInt(quantityInput.value) - 1;
+        quantityInput.value = newValue;
+    } else {
+        alert("Minimum quantity has reached.");
+        quantityInput.value = 1;
+    }
+}

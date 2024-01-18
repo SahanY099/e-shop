@@ -21,3 +21,5 @@
 19. Program the basic product searching process including pagination
 20. Program the advance product searching process including pagination
 21. Program the product sorting process
+22. Design a responsive single product view page using HTML, CSS, JavaScript and Bootstrap
+23. Program the single product view page including the seller's information.

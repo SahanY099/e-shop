@@ -211,7 +211,8 @@ include "connection.php";
                                                             <?php echo $product_data["qty"]; ?> Items Available
                                                         </span>
                                                         <br /><br />
-                                                        <a href='#' class="col-12 btn btn-success">Buy Now</a>
+                                                        <a href="<?php echo 'singleProductView.php?id=' . $product_data['id'] ?>"
+                                                            class="col-12 btn btn-success">Buy Now</a>
                                                         <button class="col-12 btn btn-dark mt-2">
                                                             <i class="bi bi-cart-plus-fill text-white fs-5"></i>
                                                         </button>
