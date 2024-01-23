@@ -19,10 +19,8 @@
 17. Program the seller's product activation and deactivation process
 18. Design a responsive product searching page using HTML, CSS, JavaScript and Bootstrap
 19. Program the basic product searching process including pagination
-<<<<<<< HEAD
 20. Program the advance product searching process including pagination
 21. Program the product sorting process
 22. Design a responsive single product view page using HTML, CSS, JavaScript and Bootstrap
 23. Program the single product view page including the seller's information.
-=======
->>>>>>> e09df034f3f4207c2c8b6327ad1fcebed059bd78
+24. Design a responsive watchlist page using HTML, CSS, JavaScript and Bootstrap
