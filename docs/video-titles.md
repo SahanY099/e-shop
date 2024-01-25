@@ -34,3 +34,4 @@
 32. Design a response invoice page using HTML, CSS, JavaScript and Bootstrap
 33. Program the product purchasing process through the PayHee payment gateway
 34. Program the invoice page
+35. Design a responsive purchase history page using HTML, CSS, JavaScript and Bootstrap
