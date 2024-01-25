@@ -32,3 +32,5 @@
 30. Design a responsive product details pop-up modal in the cart section using HTML, CSS, JavaScript and Bootstrap
 31. Program the product removing process from the cart
 32. Design a response invoice page using HTML, CSS, JavaScript and Bootstrap
+33. Program the product purchasing process through the PayHee payment gateway
+34. Program the invoice page

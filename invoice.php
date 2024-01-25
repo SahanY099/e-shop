@@ -18,137 +18,246 @@
 
     <div class="container-fluid">
         <div class="row">
-            <?php include "header.php"; ?>
+            <?php
 
-            <div class="col-12">
-                <hr />
-            </div>
+            include "header.php";
+            include "connection.php";
 
-            <div class="col-12 btn-toolbar justify-content-end">
-                <button class="btn btn-dark me-2"><i class="bi bi-printer-fill"></i> Print</button>
-                <button class="btn btn-danger me-2"><i class="bi bi-filetype-pdf"></i> Export as PDF</button>
-            </div>
+            if (isset($_SESSION["user"])) {
+                $email = $_SESSION["user"]["email"];
+                $order_id = $_GET["orderId"];
+                ?>
 
-            <div class="col-12">
-                <hr />
-            </div>
-
-            <div class="col-12" id="page">
-                <div class="row">
-
-                    <div class="col-6">
-                        <div class="ms-5 invoiceHeaderImage"></div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="row">
-                            <div class="col-12 text-primary text-decoration-underline text-end">
-                                <h2>eShop</h2>
-                            </div>
-                            <div class="col-12 fw-bold text-end">
-                                <span>Maradana, Colombo 10, Sri Lanka.</span><br />
-                                <span>+94112 555448</span><br />
-                                <span>eshop@gmail.com</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <hr class="border border-1 border-primary" />
-                    </div>
-
-                    <div class="col-12 mb-4">
-                        <div class="row">
-
-                            <div class="col-6">
-                                <h5 class="fw-bold">INVOICE TO :</h5>
-                                <h2>Sahan Perera</h2>
-                                <span>Kandy Rd, Gampaha</span><br />
-                                <span>sahan@gmail.com</span>
-                            </div>
-
-                            <div class="col-6 text-end mt-4">
-                                <h1 class="text-primary">INVOICE 100</h1>
-                                <span class="fw-bold">Data & Time of Invoice : </span>&nbsp;
-                                <span class="fw-bold">2020-12-12 08:30:48</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <table class="table">
-                            <thead>
-                                <tr class="border border-1 border-secondary">
-                                    <th>#</th>
-                                    <th>Order ID & Product</th>
-                                    <th class="text-end">Unit Price</th>
-                                    <th class="text-end">Quantity</th>
-                                    <th class="text-end">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="height: 72px;">
-                                    <td class="bg-primary text-white fs-3">100</td>
-                                    <td>
-                                        <span class="fw-bold text-primary text-decoration-underline p-2">50</span><br />
-                                        <span class="fw-bold text-primary fs-3 p-2">Apple iPhone 13</span>
-                                    </td>
-                                    <td class="fw-bold fs-6 text-end pt-3 bg-secondary text-white">Rs. 300000 .00</td>
-                                    <td class="fw-bold fs-6 text-end pt-3">10</td>
-                                    <td class="fw-bold fs-6 text-end pt-3 bg-secondary text-white">Rs. 3000000 .00</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-
-                                <tr>
-                                    <td colspan="3" class="border-0"></td>
-                                    <td class="fs-5 text-end fw-bold">SUBTOTAL</td>
-                                    <td class="text-end">Rs. 3000000 .00</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" class="border-0"></td>
-                                    <td class="fs-5 text-end fw-bold border-primary">Delivery Fee</td>
-                                    <td class="text-end border-primary">Rs. 1000 .00</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" class="border-0"></td>
-                                    <td class="fs-5 text-end fw-bold border-primary text-primary">GRAND TOTAL</td>
-                                    <td class="fs-5 text-end fw-bold border-primary text-primary">Rs. 3001000 .00</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-
-                    <div class="col-4 text-center" style="margin-top: -100px;">
-                        <span class="fs-1 fw-bold text-success">Thank You !</span>
-                    </div>
-
-                    <div class="col-12 mt-3 mb-3 border-0 border-start border-5 border-primary rounded"
-                        style="background-color: #e7f2ff;">
-                        <div class="row">
-                            <div class="col-12 mt-3 mb-3">
-                                <label class="form-label fs-5 fw-bold">NOTICE : </label>
-                                <br />
-                                <label class="form-label fs-6">
-                                    Purchased items can return befor 7 days ofDelivery.
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <hr class="border border-1 border-primary" />
-                    </div>
-
-                    <div class="col-12 text-center mb-3">
-                        <label class="form-label fs-5 text-black-50 fw-bold">
-                            Invoice was created on a computer and is valid without the Signature and Seal.
-                        </label>
-                    </div>
-
+                <div class="col-12">
+                    <hr />
                 </div>
-            </div>
+
+                <div class="col-12 btn-toolbar justify-content-end">
+                    <button class="btn btn-dark me-2" onclick="printInvoice();">
+                        <i class="bi bi-printer-fill"></i>
+                        Print
+                    </button>
+                    <button class="btn btn-danger me-2">
+                        <i class="bi bi-filetype-pdf"></i>
+                        Export as PDF
+                    </button>
+                </div>
+
+                <div class="col-12">
+                    <hr />
+                </div>
+
+                <div class="col-12" id="page">
+                    <div class="row">
+
+                        <div class="col-6">
+                            <div class="ms-5 invoiceHeaderImage"></div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-12 text-primary text-decoration-underline text-end">
+                                    <h2>eShop</h2>
+                                </div>
+                                <div class="col-12 fw-bold text-end">
+                                    <span>Maradana, Colombo 10, Sri Lanka.</span><br />
+                                    <span>+94112 555448</span><br />
+                                    <span>eshop@gmail.com</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <hr class="border border-1 border-primary" />
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <div class="row">
+
+                                <?php
+
+                                $address_rs = Database::search(
+                                    "SELECT *
+                                FROM `user_has_address`
+                                WHERE
+                                    `user_email` = '$email'"
+                                );
+                                $address_data = $address_rs->fetch_assoc();
+
+                                ?>
+
+                                <div class="col-6">
+                                    <h5 class="fw-bold">INVOICE TO :</h5>
+                                    <h2><?php echo $_SESSION["user"]["fname"] . " " . $_SESSION["user"]["lname"]; ?></h2>
+                                    <span><?php echo $address_data["line1"] . " " . $address_data["line2"]; ?></span><br />
+                                    <span><?php echo $email; ?></span>
+                                </div>
+
+                                <?php
+
+                                $invoice_rs = Database::search(
+                                    "SELECT *
+                                    FROM `invoice`
+                                    WHERE
+                                        `order_id` = '$order_id'"
+                                );
+                                $invoice_data = $invoice_rs->fetch_assoc();
+
+                                ?>
+
+                                <div class="col-6 text-end mt-4">
+                                    <h1 class="text-primary">
+                                        INVOICE <?php echo $invoice_data["invoice_id"]; ?>
+                                    </h1>
+                                    <span class="fw-bold">Data & Time of Invoice : </span>&nbsp;
+                                    <span class="fw-bold">
+                                        <?php echo $invoice_data["date"]; ?>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <table class="table">
+                                <thead>
+                                    <tr class="border border-1 border-secondary">
+                                        <th>#</th>
+                                        <th>Order ID & Product</th>
+                                        <th class="text-end">Unit Price</th>
+                                        <th class="text-end">Quantity</th>
+                                        <th class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="height: 72px;">
+                                        <td class="bg-primary text-white fs-3">
+                                            <?php echo $invoice_data["invoice_id"]; ?>
+                                        </td>
+
+                                        <td>
+                                            <span class="fw-bold text-primary text-decoration-underline p-2">
+                                                <?php echo $invoice_data["order_id"]; ?>
+                                            </span>
+                                            <br />
+
+                                            <?php
+
+                                            $product_rs = Database::search(
+                                                "SELECT *
+                                                FROM `product`
+                                                WHERE
+                                                    `id` = '" . $invoice_data["product_id"] . "'"
+                                            );
+                                            $product_data = $product_rs->fetch_assoc();
+
+                                            ?>
+
+                                            <span class="fw-bold text-primary fs-3 p-2">
+                                                <?php echo $product_data["title"]; ?>
+                                            </span>
+                                        </td>
+                                        <td class="fw-bold fs-6 text-end pt-3 bg-secondary text-white">
+                                            <?php echo number_format($product_data["price"], 2, ".", ","); ?>
+                                        </td>
+                                        <td class="fw-bold fs-6 text-end pt-3">
+                                            <?php echo $invoice_data["qty"]; ?>
+                                        </td>
+                                        <td class="fw-bold fs-6 text-end pt-3 bg-secondary text-white">
+                                            <?php echo number_format($invoice_data["total"], 2, ".", ","); ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+
+                                    <?php
+
+                                    $city_rs = Database::search(
+                                        "SELECT *
+                                    FROM `city`
+                                    WHERE
+                                        `city_id` = '" . $address_data["city_city_id"] . "'"
+                                    );
+                                    $city_data = $city_rs->fetch_assoc();
+
+                                    $district_id = $city_data["district_district_id"];
+                                    $delivery_fee = "0";
+
+                                    // number should be according to the database index of colombo
+                                    if ($district_id == "5") {
+                                        $delivery_fee = $product_data["delivery_fee_colombo"];
+                                    } else {
+                                        $delivery_fee = $product_data["delivery_fee_other"];
+                                    }
+
+                                    $total = $invoice_data["total"];
+                                    $sub_total = $total - $delivery_fee;
+
+                                    ?>
+
+                                    <tr>
+                                        <td colspan="3" class="border-0"></td>
+                                        <td class="fs-5 text-end fw-bold">SUBTOTAL</td>
+                                        <td class="text-end">
+                                            <?php echo number_format($sub_total, 2, ".", ","); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="border-0"></td>
+                                        <td class="fs-5 text-end fw-bold border-primary">Delivery Fee</td>
+                                        <td class="text-end border-primary">
+                                            <?php echo number_format($delivery_fee, 2, ".", ","); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="border-0"></td>
+                                        <td class="fs-5 text-end fw-bold border-primary text-primary">GRAND TOTAL</td>
+                                        <td class="fs-5 text-end fw-bold border-primary text-primary">
+                                            <?php echo number_format($total, 2, ".", ","); ?>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="col-4 text-center" style="margin-top: -100px;">
+                            <span class="fs-1 fw-bold text-success">Thank You !</span>
+                        </div>
+
+                        <div class="col-12 mt-3 mb-3 border-0 border-start border-5 border-primary rounded"
+                            style="background-color: #e7f2ff;">
+                            <div class="row">
+                                <div class="col-12 mt-3 mb-3">
+                                    <label class="form-label fs-5 fw-bold">NOTICE : </label>
+                                    <br />
+                                    <label class="form-label fs-6">
+                                        Purchased items can return before 7 days ofDelivery.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <hr class="border border-1 border-primary" />
+                        </div>
+
+                        <div class="col-12 text-center mb-3">
+                            <label class="form-label fs-5 text-black-50 fw-bold">
+                                Invoice was created on a computer and is valid without the Signature and Seal.
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <?php
+            } else {
+
+            }
+
+            ?>
+
+
 
             <?php include "footer.php"; ?>
         </div>

@@ -644,3 +644,115 @@ function deleteFromCart(cartId) {
     request.open('GET', "deleteFromCartProcess.php?cartId=" + cartId, true);
     request.send();
 }
+
+function payNow(productId) {
+    const qty = document.getElementById("qty-input").value;
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            const obj = JSON.parse(response);
+            const amount = obj["amount"];
+            const email = obj["email"];
+
+
+            if (response == "1") {
+                alert("Please login first");
+                window.location = "index.php";
+            } else if (response == "2") {
+                alert("Please update your profile");
+                window.location = "userProfile.php";
+            } else {
+                payhere.onCompleted = function onCompleted(orderId) {
+                    alert("Payment completed. OrderID:" + orderId);
+
+                    saveInvoice(orderId, productId, email, amount, qty);
+                };
+
+                // Payment window closed
+                payhere.onDismissed = function onDismissed() {
+                    console.log("Payment dismissed");
+                };
+
+                // Error occurred
+                payhere.onError = function onError(error) {
+                    console.log("Error:" + error);
+                };
+
+                // Put the payment variables here
+                var payment = {
+                    "sandbox": true,
+                    "merchant_id": obj["merchant_id"],
+                    "return_url": "http://localhost/e-shop/singleProductView.php?id=" + productId,
+                    "cancel_url": "http://localhost/e-shop/singleProductView.php?id=" + productId,
+                    "notify_url": "http://sample.com/notify",
+                    "order_id": obj["order_id"],
+                    "items": obj["item"],
+                    "amount": amount,
+                    "currency": "LKR",
+                    "hash": obj["hash"],
+                    "first_name": obj["fname"],
+                    "last_name": obj["lname"],
+                    "email": email,
+                    "phone": obj["mobile"],
+                    "address": obj["address"],
+                    "city": obj["city"],
+                    "country": "Sri Lanka",
+                    "delivery_address": obj["address"],
+                    "delivery_city": obj["city"],
+                    "delivery_country": "Sri Lanka",
+                    "custom_1": "",
+                    "custom_2": ""
+                };
+
+                payhere.startPayment(payment);
+
+            }
+
+        }
+    };
+
+    request.open('GET', "payNowProcess.php?productId=" + productId + "&qty=" + qty, true);
+    request.send();
+}
+
+
+function saveInvoice(orderId, productId, email, amount, qty) {
+    const requestData = new FormData();
+
+    requestData.append("orderId", orderId);
+    requestData.append("productId", productId);
+    requestData.append("email", email);
+    requestData.append("amount", amount);
+    requestData.append("qty", qty);
+
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                window.location = "invoice.php?orderId=" + orderId;
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open("POST", "saveInvoiceProcess.php", true);
+    request.send(requestData);
+}
+
+function printInvoice() {
+    const restorePage = document.body.innerHTML;
+    const page = document.getElementById("page").innerHTML;
+
+    document.body.innerHTML = page;
+    window.print();
+    document.body.innerHTML = restorePage;
+}

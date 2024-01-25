@@ -138,7 +138,7 @@ if (isset($_GET["id"])) {
                                                 <div class="row border-bottom border-dark">
                                                     <div class="col-12 my-2">
                                                         <span class="fs-4 fw-bold text-success">
-                                                            <?php $product_details["title"] ?>
+                                                            <?php $product_details["title"]; ?>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -155,7 +155,8 @@ if (isset($_GET["id"])) {
                                                             &nbsp;&nbsp;&nbsp;
 
                                                             <label class="fs-5 text-dark fw-bold">
-                                                                4.5 Stars | 39 Reviews and Ratings</label>
+                                                                4.5 Stars | 39 Reviews and Ratings
+                                                            </label>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -196,7 +197,7 @@ if (isset($_GET["id"])) {
                                                         </span>
                                                         <br />
                                                         <span class="fs-5 text-primary">
-                                                            <b>In Stock : </b><?php echo $product_details["qty"] ?> Items
+                                                            <b>In Stock : </b><?php echo $product_details["qty"]; ?> Items
                                                             Available
                                                         </span>
                                                     </div>
@@ -269,7 +270,7 @@ if (isset($_GET["id"])) {
                                                                             <input type="text"
                                                                                 class="border-0 fs-5 fw-bold text-start"
                                                                                 style="outline: none;" pattern="[0-9]" value="1"
-                                                                                onkeyup="checkQuantityValue(<?php echo $product_details['qty'] ?>);"
+                                                                                onkeyup="checkQuantityValue(<?php echo $product_details['qty']; ?>);"
                                                                                 id="qty-input" />
 
                                                                             <div class="position-absolute qty-buttons">
@@ -277,12 +278,12 @@ if (isset($_GET["id"])) {
                                                                                     class="justify-content-center d-flex flex-column 
                                                                             align-items-center border border-1 border-secondary qty-inc">
                                                                                     <i class="bi bi-caret-up-fill text-primary fs-5"
-                                                                                        onclick="quantityIncrease(<?php echo $product_details['qty'] ?>);"></i>
+                                                                                        onclick="quantityIncrease(<?php echo $product_details['qty']; ?>);"></i>
                                                                                 </div>
                                                                                 <div class="justify-content-center d-flex flex-column align-items-center 
                                                                 border border-1 border-secondary qty-dec">
                                                                                     <i class="bi bi-caret-down-fill text-primary fs-5"
-                                                                                        onclick="quantityDecrease(<?php echo $product_details['qty'] ?>);"></i>
+                                                                                        onclick="quantityDecrease(<?php echo $product_details['qty']; ?>);"></i>
                                                                                 </div>
                                                                             </div>
 
@@ -293,7 +294,9 @@ if (isset($_GET["id"])) {
                                                                         <div class="col-12 mt-5">
                                                                             <div class="row">
                                                                                 <div class="col-4 d-grid">
-                                                                                    <button class="btn btn-success">
+                                                                                    <button class="btn btn-success"
+                                                                                        id="payhere-payment" type="submit"
+                                                                                        onclick="payNow(<?php echo $product_id; ?>)">
                                                                                         Buy Now
                                                                                     </button>
                                                                                 </div>
@@ -418,7 +421,7 @@ if (isset($_GET["id"])) {
                                             </div>
                                             <div class="col-9">
                                                 <label class="form-label fs-4">
-                                                    <?php echo $product_details["bname"] ?>
+                                                    <?php echo $product_details["bname"]; ?>
                                                 </label>
                                             </div>
                                         </div>
@@ -431,7 +434,7 @@ if (isset($_GET["id"])) {
                                             </div>
                                             <div class="col-9">
                                                 <label class="form-label fs-4">
-                                                    <?php echo $product_details["mname"] ?>
+                                                    <?php echo $product_details["mname"]; ?>
                                                 </label>
                                             </div>
                                         </div>
@@ -444,8 +447,8 @@ if (isset($_GET["id"])) {
                                             </div>
                                             <div class="col-12">
                                                 <textarea cols="60" rows="10" class="form-control" readonly>
-                                                                                                                                                                <?php echo $product_details["description"] ?>
-                                                                                                                                                                </textarea>
+                                                                                                            <?php echo $product_details["description"]; ?>
+                                                                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -486,13 +489,14 @@ if (isset($_GET["id"])) {
 
             <script src="bootstrap.bundle.js"></script>
             <script src="script.js"></script>
-            <!-- <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script> -->
+            <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
         </body>
 
         <?php
     } else {
         echo "Sorry for the inconvenience. Please try again later.";
     }
+
 } else {
     echo "Something went wrong.";
 }
