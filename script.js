@@ -545,3 +545,46 @@ function quantityDecrease(maxQty) {
         quantityInput.value = 1;
     }
 }
+
+function addToWatchlist(productId) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "added") {
+                document.getElementById("heart-" + productId).classList.add("text-danger");
+                document.getElementById("heart-" + productId).classList.remove("text-dark");
+            } else if (response == "removed") {
+                document.getElementById("heart-" + productId).classList.add("text-dark");
+                document.getElementById("heart-" + productId).classList.remove("text-danger");
+            } else {
+                alert(response);
+            }
+        };
+    };
+
+    request.open('GET', "addToWatchlistProcess.php?productId=" + productId, true);
+    request.send();
+};
+
+function removeFromWatchlist(watchlistId) {
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                window.location.reload();
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open('GET', "removeFromWatchlistProcess.php?watchlistId=" + watchlistId, true);
+    request.send();
+}

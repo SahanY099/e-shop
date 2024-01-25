@@ -19,118 +19,206 @@
     <div class="container-fluid">
         <div class="row">
 
-            <?php include "header.php"; ?>
+            <?php include "header.php";
 
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-12 border border-1 border-primary rounded mb-2">
-                        <div class="row">
+            include "connection.php";
 
-                            <div class="col-12">
-                                <label class="form-label fs-1 fw-bolder">Watchlist &hearts;</label>
-                            </div>
+            if (isset($_SESSION["user"])) {
+                $watchlist_rs = Database::search(
+                    "SELECT *
+                    FROM `watchlist`
+                    INNER JOIN `product` ON
+                        watchlist.product_id = product.id
+                    INNER JOIN  `product_has_color` ON
+                        product.id = product_has_color.product_id
+                    INNER JOIN `color` ON
+                        product_has_color.color_clr_id = color.clr_id
+                    INNER JOIN `condition` ON
+                        product.condition_condition_id = condition.condition_id
+                    INNER JOIN `user` ON
+                        product.user_email = user.email
+                    WHERE
+                        watchlist.user_email = '" . $_SESSION["user"]["email"] . "'"
+                );
+                $watchlist_num = $watchlist_rs->num_rows;
 
-                            <div class="col-12 col-lg-6">
-                                <hr />
-                            </div>
+                ?>
 
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="offset-lg-2 col-12 col-lg-6 mb-3">
-                                        <input type="text" class="form-control" placeholder="Search in Watchlist..." />
-                                    </div>
-                                    <div class="col-12 col-lg-2 mb-3 d-grid">
-                                        <button class="btn btn-primary">Search</button>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 border border-1 border-primary rounded mb-2">
+                            <div class="row">
+
+                                <div class="col-12">
+                                    <label class="form-label fs-1 fw-bolder">Watchlist &hearts;</label>
+                                </div>
+
+                                <div class="col-12 col-lg-6">
+                                    <hr />
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="offset-lg-2 col-12 col-lg-6 mb-3">
+                                            <input type="text" class="form-control" placeholder="Search in Watchlist..." />
+                                        </div>
+                                        <div class="col-12 col-lg-2 mb-3 d-grid">
+                                            <button class="btn btn-primary">Search</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-12">
-                                <hr />
-                            </div>
-
-                            <div class="col-11 col-lg-2 border-0 border-end border-1 border-dark">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Watchlist</li>
-                                    </ol>
-                                </nav>
-                                <nav class="nav nav-pills flex-column">
-                                    <a class="nav-link active" aria-current="page" href="#">My Watchlist</a>
-                                    <a class="nav-link" href="#">My Cart</a>
-                                    <a class="nav-link" href="#">Recents</a>
-                                </nav>
-                            </div>
-
-                            <!-- empty view -->
-                            <div class="col-12 col-lg-9">
-                                <div class="row">
-                                    <div class="col-12 emptyView"></div>
-                                    <div class="col-12 text-center">
-                                        <label class="form-label fs-1 fw-bold">You have no items in your Watchlist
-                                            yet.</label>
-                                    </div>
-                                    <div class="offset-lg-4 col-12 col-lg-4 d-grid mb-3">
-                                        <a href="home.php" class="btn btn-warning fs-3 fw-bold">Start Shopping</a>
-                                    </div>
+                                <div class="col-12">
+                                    <hr />
                                 </div>
-                            </div>
-                            <!-- empty view -->
 
-                            <!-- have products -->
-                            <!-- <div class="col-12 col-lg-9">
-                                <div class="row">
+                                <div class="col-11 col-lg-2 border-0 border-end border-1 border-dark">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="home.php">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Watchlist</li>
+                                        </ol>
+                                    </nav>
+                                    <nav class="nav nav-pills flex-column">
+                                        <a class="nav-link active" aria-current="page" href="#">My Watchlist</a>
+                                        <a class="nav-link" href="#">My Cart</a>
+                                        <a class="nav-link" href="#">Recents</a>
+                                    </nav>
+                                </div>
 
-                                    <div class="card mb-3 mx-0 mx-lg-2 col-12">
-                                        <div class="row g-0">
-                                            <div class="col-md-4">
+                                <?php
 
-                                                <img src="resource/mobile_images/iphone_12.jpeg"
-                                                    class="img-fluid rounded-start" style="height: 200px;" />
+                                if ($watchlist_num == 0) {
+                                    ?>
+
+                                    <div class="col-12 col-lg-9">
+                                        <div class="row">
+                                            <div class="col-12 emptyView"></div>
+                                            <div class="col-12 text-center">
+                                                <label class="form-label fs-1 fw-bold">You have no items in your Watchlist
+                                                    yet.</label>
                                             </div>
-                                            <div class="col-md-5">
-                                                <div class="card-body">
-
-                                                    <h5 class="card-title fs-2 fw-bold text-primary">Apple iPhone 12
-                                                    </h5>
-
-                                                    <span class="fs-5 fw-bold text-black-50">Colour : Black</span>
-                                                    &nbsp;&nbsp; | &nbsp;&nbsp;
-
-                                                    <span class="fs-5 fw-bold text-black-50">Condition : Used</span>
-                                                    <br />
-                                                    <span class="fs-5 fw-bold text-black-50">Price :</span>&nbsp;&nbsp;
-                                                    <span class="fs-5 fw-bold text-black">Rs. 150000 .00</span>
-                                                    <br />
-                                                    <span class="fs-5 fw-bold text-black-50">Quantity
-                                                        :</span>&nbsp;&nbsp;
-                                                    <span class="fs-5 fw-bold text-black">10 Items available</span>
-                                                    <br />
-                                                    <span class="fs-5 fw-bold text-black-50">Seller :</span>
-                                                    <br />
-                                                    <span class="fs-5 fw-bold text-black">Lahiru</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 mt-5">
-                                                <div class="card-body d-lg-grid">
-                                                    <a href="#" class="btn btn-outline-success mb-2">Buy Now</a>
-                                                    <a href="#" class="btn btn-outline-warning mb-2">Add to Cart</a>
-                                                    <a href="#" class="btn btn-outline-danger">Remove</a>
-                                                </div>
+                                            <div class="offset-lg-4 col-12 col-lg-4 d-grid mb-3">
+                                                <a href="home.php" class="btn btn-warning fs-3 fw-bold">Start Shopping</a>
                                             </div>
                                         </div>
                                     </div>
 
-                                </div>
-                            </div> -->
-                            <!-- have products -->
+                                    <?php
+                                } else {
+                                    ?>
 
+                                    <div class="col-12 col-lg-9">
+                                        <div class="row">
 
+                                            <?php
+
+                                            for ($i = 0; $i < $watchlist_num; $i++) {
+                                                $watchlist_data = $watchlist_rs->fetch_assoc();
+
+                                                ?>
+
+                                                <div class="card mb-3 mx-0 mx-lg-2 col-12">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-4">
+
+                                                            <?php
+
+                                                            $img_rs = Database::search(
+                                                                "SELECT *
+                                                            FROM `product_img`
+                                                            WHERE
+                                                                `product_id` = '" . $watchlist_data['product_id'] . "'"
+                                                            );
+                                                            $img_data = $img_rs->fetch_assoc();
+
+                                                            ?>
+
+                                                            <img src="<?php echo $img_data['img_path'] ?>"
+                                                                class="img-fluid rounded-start" style="height: 200px;" />
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="card-body">
+
+                                                                <h5 class="card-title fs-2 fw-bold text-primary">
+                                                                    <?php echo $watchlist_data["title"]; ?>
+                                                                </h5>
+
+                                                                <span class="fs-5 fw-bold text-black-50">
+                                                                    Colour : <?php echo $watchlist_data["clr_name"]; ?>
+                                                                </span>
+                                                                &nbsp;&nbsp; | &nbsp;&nbsp;
+
+                                                                <span class="fs-5 fw-bold text-black-50">
+                                                                    Condition : <?php echo $watchlist_data["condition_name"]; ?>
+                                                                </span>
+                                                                <br />
+
+                                                                <span class="fs-5 fw-bold text-black-50">
+                                                                    Price :
+                                                                </span>
+                                                                &nbsp;&nbsp;
+                                                                <span class="fs-5 fw-bold text-black">
+                                                                    <?php echo $watchlist_data["price"]; ?>
+                                                                </span>
+                                                                <br />
+
+                                                                <span class="fs-5 fw-bold text-black-50">
+                                                                    Quantity :</span>
+                                                                &nbsp;&nbsp;
+                                                                <span class="fs-5 fw-bold text-black">
+                                                                    <?php echo $watchlist_data["qty"]; ?> Items available
+                                                                </span>
+                                                                <br />
+
+                                                                <span class="fs-5 fw-bold text-black-50">
+                                                                    Seller :
+                                                                </span>
+                                                                <span class="fs-5 fw-bold text-black">
+                                                                    <?php echo $watchlist_data["fname"] . " " . $watchlist_data["lname"]; ?>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 mt-5">
+                                                            <div class="card-body d-lg-grid">
+                                                                <button class="btn btn-outline-success mb-2">Buy Now</button>
+                                                                <button class="btn btn-outline-warning mb-2">Add to Cart</button>
+                                                                <button class="btn btn-outline-danger"
+                                                                    onclick="removeFromWatchlist(<?php echo $watchlist_data['w_id']; ?>);">Remove</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                            }
+                                            ?>
+
+                                        </div>
+                                    </div>
+
+                                    <?php
+                                }
+                                ?>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <?php
+
+            } else {
+                ?>
+
+                <script>
+                    window.location = "home.php";
+                </script>
+
+                <?php
+            }
+
+            ?>
 
             <?php include "footer.php"; ?>
 
@@ -139,6 +227,7 @@
 
     <script src="bootstrap.bundle.js"></script>
     <script src="script.js"></script>
+
 </body>
 
 </html>

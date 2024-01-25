@@ -24,3 +24,5 @@
 22. Design a responsive single product view page using HTML, CSS, JavaScript and Bootstrap
 23. Program the single product view page including the seller's information.
 24. Design a responsive watchlist page using HTML, CSS, JavaScript and Bootstrap
+25. Program the watchlist page including product adding and viewing process
+26. Program the product removing process from the watchlist
