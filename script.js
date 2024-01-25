@@ -588,3 +588,59 @@ function removeFromWatchlist(watchlistId) {
     request.open('GET', "removeFromWatchlistProcess.php?watchlistId=" + watchlistId, true);
     request.send();
 }
+
+function addToCart(productId) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            alert(response);
+        }
+    };
+
+    request.open('GET', "addToCartProcess.php?productId=" + productId, true);
+    request.send();
+}
+
+function changeCartQty(cartId) {
+    const qty = document.getElementById("qty-num-" + cartId).value;
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "updated") {
+                window.location.reload();
+            } else {
+                alert(response);
+                window.location.reload();
+            }
+        }
+    };
+
+    request.open('GET', "cartQtyUpdateProcess.php?cartId=" + cartId + "&qty=" + qty, true);
+    request.send();
+}
+
+function deleteFromCart(cartId) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "removed") {
+                alert("Product removed from the cart");
+                window.location.reload();
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open('GET', "deleteFromCartProcess.php?cartId=" + cartId, true);
+    request.send();
+}

@@ -26,3 +26,8 @@
 24. Design a responsive watchlist page using HTML, CSS, JavaScript and Bootstrap
 25. Program the watchlist page including product adding and viewing process
 26. Program the product removing process from the watchlist
+27. Design a responsive cart page using HTML, CSS, JavaScript and Bootstrap
+28. Program the cart page including product adding and viewing process
+29. Program the cart total price calculation process including the delivery fee
+30. Design a responsive product details pop-up modal in the cart section using HTML, CSS, JavaScript and Bootstrap
+31. Program the product removing process from the cart
