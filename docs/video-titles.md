@@ -36,3 +36,4 @@
 34. Program the invoice page
 35. Design a responsive purchase history page using HTML, CSS, JavaScript and Bootstrap
 36. Program the feedbacks sending process to the purchased product
+37. Design a responsive message page suing HTML, CSS, JavaScript and Bootstrap
