@@ -35,3 +35,4 @@
 33. Program the product purchasing process through the PayHee payment gateway
 34. Program the invoice page
 35. Design a responsive purchase history page using HTML, CSS, JavaScript and Bootstrap
+36. Program the feedbacks sending process to the purchased product

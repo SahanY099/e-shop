@@ -756,3 +756,51 @@ function printInvoice() {
     window.print();
     document.body.innerHTML = restorePage;
 }
+
+let feedbackModel;
+
+function addFeedback(productId) {
+    console.log('ok');
+    const modal = document.getElementById("feedback-modal-" + productId);
+    feedbackModel = new bootstrap.Modal(modal);
+
+    feedbackModel.show();
+}
+
+function saveFeedback(productId) {
+    let type;
+
+    if (document.getElementById('type-1').checked) {
+        type = 1;
+    } else if (document.getElementById('type-2').checked) {
+        type = 2;
+    } else if (document.getElementById('type-3').checked) {
+        type = 3;
+    }
+
+    const feedback = document.getElementById('feed').value;
+
+    const requestData = new FormData();
+
+    requestData.append('productId', productId);
+    requestData.append('type', type);
+    requestData.append('feed', feedback);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                alert("Thank you for your feedback.");
+                feedbackModel.hide();
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open('POST', 'saveFeedbackProcess.php', true);
+    request.send(requestData);
+}

@@ -14,34 +14,36 @@
     <link rel="icon" href="resources/logo.svg" />
 </head>
 
-<?php
-include "connection.php";
+<body>
+    <?php
+    include "connection.php";
 
-if (isset($_GET["id"])) {
-    $product_id = $_GET["id"];
+    if (isset($_GET["id"])) {
+        $product_id = $_GET["id"];
 
 
-    $product_rs = Database::search(
-        "SELECT
+        $product_rs = Database::search(
+            "SELECT
             product.id, product.price, product.qty, product.description, product.title, product.datetime_added,
             product.delivery_fee_colombo, product.delivery_fee_other, product.status_status_id,
             product.user_email, product.condition_condition_id, product.model_has_brand_id,
             product.category_cat_id, model.model_name AS mname, brand.brand_name AS bname
-        FROM `product`
-        INNER JOIN `model_has_brand` ON model_has_brand.id=product.model_has_brand_id
-        INNER JOIN `brand` ON brand.brand_id=model_has_brand.brand_brand_id
-        INNER JOIN `model` ON model.model_id=model_has_brand.model_model_id
-        WHERE product.id = '" . $product_id . "'
+            FROM `product`
+            INNER JOIN `model_has_brand`
+                ON model_has_brand.id=product.model_has_brand_id
+            INNER JOIN `brand`
+                ON brand.brand_id=model_has_brand.brand_brand_id
+            INNER JOIN `model`
+                ON model.model_id=model_has_brand.model_model_id
+            WHERE product.id = '" . $product_id . "'
         "
-    );
-    $product_num = $product_rs->num_rows;
+        );
+        $product_num = $product_rs->num_rows;
 
-    if ($product_num == 1) {
-        $product_details = $product_rs->fetch_assoc();
+        if ($product_num == 1) {
+            $product_details = $product_rs->fetch_assoc();
 
-        ?>
-
-        <body>
+            ?>
 
             <script>
                 document.title = "<?php echo $product_details["title"]; ?> | eShop";
@@ -102,6 +104,7 @@ if (isset($_GET["id"])) {
                                                     <img src="resources/empty.svg" class="img-thumbnail mt-1 mb-1"
                                                         alt="Product image" />
                                                 </li>
+
                                                 <?php
                                             }
 
@@ -222,7 +225,8 @@ if (isset($_GET["id"])) {
                                                             <div
                                                                 class="col-12 col-lg-6 border border-1 border-dark text-center">
                                                                 <span class="fs-5 text-primary">
-                                                                    <b>Seller : </b><?php echo $seller_details["fname"]; ?>
+                                                                    <b>Seller : </b>
+                                                                    <?php echo $seller_details["fname"]; ?>
                                                                 </span>
                                                             </div>
                                                             <div
@@ -447,8 +451,8 @@ if (isset($_GET["id"])) {
                                             </div>
                                             <div class="col-12">
                                                 <textarea cols="60" rows="10" class="form-control" readonly>
-                                                                                                            <?php echo $product_details["description"]; ?>
-                                                                                                </textarea>
+                                                                                                                                                                                                                            <?php echo $product_details["description"]; ?>
+                                                                                                                                                                                                                </textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -460,25 +464,67 @@ if (isset($_GET["id"])) {
                                 <div class="row border border-1 border-dark rounded overflow-scroll me-0"
                                     style="height: 300px;">
 
-                                    <div class="col-12 mt-1 mb-1 mx-1">
-                                        <div class="row border border-1 border-dark rounded me-0">
+                                    <?php
 
-                                            <div class="col-10 mt-1 mb-1 ms-0">Sahan Perera</div>
-                                            <div class="col-2 mt-1 mb-1 me-0">
+                                    $feedback_rs = Database::search(
+                                        "SELECT *
+                                        FROM `feedback`
+                                        INNER JOIN `user`
+                                            ON feedback.user_email = user.email
+                                        WHERE
+                                            `product_id` = '$product_id'"
+                                    );
+                                    $feedback_num = $feedback_rs->num_rows;
 
-                                                <span class="badge bg-success">Positive</span>
-                                            </div>
+                                    for ($i = 0; $i < $feedback_num; $i++) {
+                                        $feedback_data = $feedback_rs->fetch_assoc();
 
-                                            <div class="col-12">
-                                                <b>
-                                                    good Product
-                                                </b>
-                                            </div>
-                                            <div class="offset-6 col-6 text-end">
-                                                <label class="form-label fs-6 text-black-50">2023-12-20 10:20:40</label>
+                                        if ($feedback_data["type"] == 1) {
+                                            $feedback_type = "Positive";
+                                            $feedback_type_color = "bg-success";
+                                        } elseif ($feedback_data["type"] == 2) {
+                                            $feedback_type = "Neutral";
+                                            $feedback_type_color = "bg-warning";
+                                        } elseif ($feedback_data["type"] == 3) {
+                                            $feedback_type = "Negative";
+                                            $feedback_type_color = "bg-danger";
+                                        }
+
+                                        ?>
+
+                                        <div class="col-12 mt-1 mb-1 mx-1">
+                                            <div class="row border border-1 border-dark rounded me-0">
+
+                                                <div class="col-10 mt-1 mb-1 ms-0">
+                                                    <?php echo $feedback_data["fname"] . " " . $feedback_data["lname"]; ?>
+                                                </div>
+
+                                                <div class="col-2 mt-1 mb-1 me-0">
+
+                                                    <span class="badge <?php echo $feedback_type_color; ?>">
+                                                        <?php echo $feedback_type; ?>
+                                                    </span>
+
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <b>
+                                                        <?php echo $feedback_data["feed"]; ?>
+                                                    </b>
+                                                </div>
+                                                <div class="offset-6 col-6 text-end">
+                                                    <label class="form-label fs-6 text-black-50">
+                                                        <?php echo $feedback_data["date"]; ?>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <?php
+                                    }
+                                    ?>
+
+
                                 </div>
                             </div>
 
@@ -487,20 +533,22 @@ if (isset($_GET["id"])) {
                 </div>
             </div>
 
-            <script src="bootstrap.bundle.js"></script>
-            <script src="script.js"></script>
-            <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
-        </body>
 
-        <?php
+
+            <?php
+        } else {
+            echo "Sorry for the inconvenience. Please try again later.";
+        }
+
     } else {
-        echo "Sorry for the inconvenience. Please try again later.";
+        echo "Something went wrong.";
     }
 
-} else {
-    echo "Something went wrong.";
-}
+    ?>
 
-?>
+    <script src="bootstrap.bundle.js"></script>
+    <script src="script.js"></script>
+    <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
+</body>
 
 </html>
