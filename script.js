@@ -804,3 +804,56 @@ function saveFeedback(productId) {
     request.open('POST', 'saveFeedbackProcess.php', true);
     request.send(requestData);
 }
+
+function sendMsg() {
+    let receiverMail;
+
+    const selectedReceiver = document.getElementById('select-user').value;
+
+    if (selectedReceiver == 0) {
+        receiverMail = document.getElementById('rmail').innerHTML;
+    } else {
+        receiverMail = selectedReceiver;
+    }
+
+    console.log(receiverMail);
+
+    const msgText = document.getElementById('msg-text');
+
+    const requestData = new FormData();
+    requestData.append('receiverEmail', receiverMail);
+    requestData.append('msgText', msgText.value);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                alert("Message sent");
+                window.location.reload();
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open('POST', 'sendMsgProcess.php', true);
+    request.send(requestData);
+
+}
+
+function viewMessage(email) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        if (request.status == 200 & request.readyState == 4) {
+            const response = request.responseText;
+            document.getElementById("chat-box").innerHTML = response;
+        }
+    };
+
+    request.open("GET", "viewMsgProcess.php?email=" + email, true);
+    request.send();
+}
