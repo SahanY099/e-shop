@@ -857,3 +857,57 @@ function viewMessage(email) {
     request.open("GET", "viewMsgProcess.php?email=" + email, true);
     request.send();
 }
+
+let adminVerificationModel;
+function adminVerification() {
+    const email = document.getElementById("email");
+
+    const requestData = new FormData();
+    requestData.append("email", email.value);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                alert("Please take a look at you email inbox for verification code.");
+                const adminVerificationModelElement = document.getElementById("verification-modal");
+                adminVerificationModel = new bootstrap.Modal(adminVerificationModelElement);
+                adminVerificationModel.show();
+
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open("POST", "adminVerificationProcess.php", true);
+    request.send(requestData);
+}
+
+function verifyAdmin() {
+    const verificationCode = document.getElementById("verification-code");
+
+    const requestData = new FormData();
+    requestData.append("verificationCode", verificationCode.value);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                adminVerificationModel.hide();
+                window.location = "adminPanel.php";
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open("POST", "verificationProcess.php", true);
+    request.send(requestData);
+}

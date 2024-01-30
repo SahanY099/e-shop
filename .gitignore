@@ -4,3 +4,4 @@ resources/profile_images
 connection.php
 forgotPasswordProcess.php
 .vscode/
+adminVerificationProcess.php

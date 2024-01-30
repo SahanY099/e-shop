@@ -93,10 +93,10 @@ include "connection.php";
                                     for ($x = 0; $x < $num; $x++) {
                                         $data = $rs->fetch_assoc();
                                         ?>
-                                        <option value="<?php echo $data["gender_id"]; ?>">
-                                            <?php echo $data["gender_name"]; ?>
-                                        </option>
-                                        <?php
+                                    <option value="<?php echo $data["gender_id"]; ?>">
+                                        <?php echo $data["gender_name"]; ?>
+                                    </option>
+                                    <?php
                                     }
                                     ?>
                                 </select>
@@ -174,6 +174,9 @@ include "connection.php";
                             <div class="col-12 col-lg-6 d-grid">
                                 <button class="btn btn-danger" onclick="changeView()">New to eShop? Join Now</button>
                             </div>
+                            <div class="col-12 d-grid">
+                                <a href="adminSignin.php" class="btn btn-success">Go to Admin Login</a>
+                            </div>
                         </div>
                     </div>
 
@@ -224,8 +227,10 @@ include "connection.php";
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="resetPassword();">Reset
-                                Password</button>
+                            <button type="button" class="btn btn-primary" onclick="resetPassword();">
+                                Reset Password
+                            </button>
+
                         </div>
                     </div>
                 </div>

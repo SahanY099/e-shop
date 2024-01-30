@@ -38,3 +38,5 @@
 36. Program the feedbacks sending process to the purchased product
 37. Design a responsive message page suing HTML, CSS, JavaScript and Bootstrap
 38. Program the message sending and viewing process
+39. Design a responsive signing page for admin panel using HTML, CSS, JavaScript and Bootstrap
+40. Program the admin signing process including the verification code
