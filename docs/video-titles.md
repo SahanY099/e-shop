@@ -40,3 +40,5 @@
 38. Program the message sending and viewing process
 39. Design a responsive signing page for admin panel using HTML, CSS, JavaScript and Bootstrap
 40. Program the admin signing process including the verification code
+41. Design a responsive admin homepage using HTML, CSS, JavaScript and Bootstrap
+42. Program the admin homepage including the summarized report
