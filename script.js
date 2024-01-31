@@ -911,3 +911,26 @@ function verifyAdmin() {
     request.open("POST", "verificationProcess.php", true);
     request.send(requestData);
 }
+
+function blockUser(email) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            alert(response);
+            window.location.reload();
+        }
+    };
+
+    request.open("GET", "userBlockProcess.php?email=" + email, true);
+    request.send();
+}
+
+let msgModal;
+
+function viewMsgModal(email) {
+    const modal = document.getElementById("msg-modal-" + email);
+    msgModal = new bootstrap.Modal(modal);
+    msgModal.show();
+}

@@ -42,3 +42,5 @@
 40. Program the admin signing process including the verification code
 41. Design a responsive admin homepage using HTML, CSS, JavaScript and Bootstrap
 42. Program the admin homepage including the summarized report
+43. Design a responsive manage users page in admin panel using HTML, CSS, JavaScript and Bootstrap and program the user blocking process
+47. Design view message modal in admin panel using HTML, CSS, JavaScript and Bootstrap
