@@ -43,4 +43,7 @@
 41. Design a responsive admin homepage using HTML, CSS, JavaScript and Bootstrap
 42. Program the admin homepage including the summarized report
 43. Design a responsive manage users page in admin panel using HTML, CSS, JavaScript and Bootstrap and program the user blocking process
+44. Design a responsive manager products page in admin panel using HTML, CSS, JavaScript and Bootstrap and program the product blocking process
+45. Design a responsive single product view modal in product page using HTML, CSS, JavaScript and Bootstrap
+46. Design a responsive category registration modal in manager product using HTML, CSS, JavaScript and Bootstrap and program the category and viewing process
 47. Design view message modal in admin panel using HTML, CSS, JavaScript and Bootstrap

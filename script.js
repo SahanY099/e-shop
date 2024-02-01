@@ -934,3 +934,95 @@ function viewMsgModal(email) {
     msgModal = new bootstrap.Modal(modal);
     msgModal.show();
 }
+
+function blockProduct(productId) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            alert(response);
+            window.location.reload();
+        }
+    };
+
+    request.open("GET", "productBlockProcess.php?productId=" + productId, true);
+    request.send();
+}
+
+let productModal;
+
+function viewProductModal(email) {
+    const modal = document.getElementById("product-modal-" + email);
+    productModal = new bootstrap.Modal(modal);
+    productModal.show();
+}
+
+let categoryModal;
+
+function addNewCategory() {
+    const modal = document.getElementById("add-category-modal");
+    categoryModal = new bootstrap.Modal(modal);
+    categoryModal.show();
+}
+
+let verificationCodeModal;
+let email;
+let categoryName;
+
+function verifyCategory() {
+    const modal = document.getElementById("add-category-verification-modal");
+    verificationCodeModal = new bootstrap.Modal(modal);
+
+    email = document.getElementById("email").value;
+    categoryName = document.getElementById("category-name").value;
+
+    const requestData = new FormData();
+    requestData.append("email", email);
+    requestData.append("name", categoryName);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                categoryModal.hide();
+                verificationCodeModal.show();
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open("POST", "addNewCategoryProcess.php", true);
+    request.send(requestData);
+}
+
+function saveCategory() {
+    const verificationCode = document.getElementById("verification-code");
+
+    const requestData = new FormData();
+    requestData.append("verificationCode", verificationCode.value);
+    requestData.append("email", email);
+    requestData.append("categoryName", categoryName);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+
+            if (response == "success") {
+                verificationCodeModal.hide();
+                window.location.reload();
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open("POST", "saveCategoryProcess.php", true);
+    request.send(requestData);
+}
