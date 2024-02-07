@@ -6,3 +6,4 @@ forgotPasswordProcess.php
 .vscode/
 adminVerificationProcess.php
 addNewCategoryProcess.php
+sendAdminMsgProcess.php

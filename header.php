@@ -61,7 +61,11 @@
                             <li><a class="dropdown-item" href="watchlist.php">Watchlist</a></li>
                             <li><a class="dropdown-item" href="#">Purchase History</a></li>
                             <li><a class="dropdown-item" href="messages.php">Messages</a></li>
-                            <li><a class="dropdown-item" href="#">Contact Admin</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="contactAdmin();">
+                                    Contact Admin
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
@@ -69,7 +73,7 @@
                     </div>
 
                     <!-- msg modal -->
-                    <div class="modal" tabindex="-1" id="contactAdmin">
+                    <div class="modal" tabindex="-1" id="contact-admin">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -115,10 +119,12 @@
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-9">
-                                                <input type="text" class="form-control" id="msg-txt" />
+                                                <input type="text" class="form-control" id="msg-text" />
                                             </div>
                                             <div class="col-3 d-grid">
-                                                <button type="button" class="btn btn-primary">Send</button>
+                                                <button type="button" class="btn btn-primary" onclick="sendAdminMsg();">
+                                                    Send
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

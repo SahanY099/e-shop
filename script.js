@@ -1026,3 +1026,83 @@ function saveCategory() {
     request.open("POST", "saveCategoryProcess.php", true);
     request.send(requestData);
 }
+
+function sendAdminMsg(email = "") {
+    const text = document.getElementById("msg-text");
+
+    const requestData = new FormData();
+
+    requestData.append("text", text.value);
+    requestData.append("email", email);
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+        }
+    };
+
+    request.open("POST", "sendAdminMsgProcess.php", true);
+    request.send(requestData);
+}
+
+let contactAdminModal;
+function contactAdmin() {
+    const modal = document.getElementById('contact-admin');
+
+    contactAdminModal = new bootstrap.Modal(modal);
+    contactAdminModal.show();
+}
+
+function searchInvoice() {
+    const text = document.getElementById("search-text").value;
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            document.getElementById("view-area").innerHTML = response;
+
+        }
+    };
+
+    request.open("GET", "searchInvoiceProcess.php?id=" + text, true);
+    request.send();
+}
+
+function findSellings() {
+    const from = document.getElementById("from").value;
+    const to = document.getElementById("to").value;
+
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+            const response = request.responseText;
+            document.getElementById("view-area").innerHTML = response;
+        }
+    };
+
+    request.open("GET", "findSellingsProcess.php?from=" + from + "&to=" + to, true);
+    request.send();
+}
+
+function changeInvoiceStatus(invoiceId) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = () => {
+        if (request.status == 200 & request.readyState == 4) {
+            const response = request.responseText;
+            if (response == 'success') {
+                window.location.reload();
+            } else {
+                alert(response);
+            }
+        }
+    };
+
+    request.open("GET", "changeInvoiceStatusProcess.php?invoiceId=" + invoiceId, true);
+    request.send();
+}

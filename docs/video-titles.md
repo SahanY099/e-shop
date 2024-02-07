@@ -47,3 +47,7 @@
 45. Design a responsive single product view modal in product page using HTML, CSS, JavaScript and Bootstrap
 46. Design a responsive category registration modal in manager product using HTML, CSS, JavaScript and Bootstrap and program the category and viewing process
 47. Design view message modal in admin panel using HTML, CSS, JavaScript and Bootstrap
+48. Program the message viewing and replying process
+49. Design a responsive product selling history page in admin panel using HTML, CSS, JavaScript and Bootstrap
+50. Program the product selling history page including product searching and daily selling products process
+51. Tour video

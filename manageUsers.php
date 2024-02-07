@@ -231,10 +231,13 @@
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-9">
-                                                <input type="text" class="form-control" id="msg-txt" />
+                                                <input type="text" class="form-control" id="msg-text" />
                                             </div>
                                             <div class="col-3 d-grid">
-                                                <button type="button" class="btn btn-primary">Send</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="sendAdminMsg('<?php echo $user_data['email']; ?>');">
+                                                    Send
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
